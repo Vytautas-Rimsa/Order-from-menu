@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>14 savarankiskas</title>
+    <style>
+        .work{
+                display: inline-block;
+                width: 150px;
+                margin-right:10px
+            }
+    </style>
+</head>
+
+<body>
+    <h3>Choose:</h3>
+    <div><span class="work">First dishes</span>
+        <select id="options1" class="work"></select>	
+        <div id="options1A" style="display:inline-block;">&nbsp;</div>
+    </div><br>
+    <div><span class="work">Second dishes</span>
+        <select id="options2" class="work"></select>	
+        <div id="options2A" style="display:inline-block;">&nbsp;</div>
+    </div><br>
+    <div><span class="work">Drinks</span>
+        <select id="options3" class="work"></select>	
+        <div id="options3A" style="display:inline-block;">&nbsp;</div>
+    </div><br>
+    <div><span class="work">Deserts</span>
+        <select id="options4" class="work"></select>	
+        <div id="options4A" style="display:inline-block;">&nbsp;</div>
+    </div><br>
+    <button type="button" onclick="uzsakyti()">Submit</button>
+    <p id="pateiktasUzsakymas"></p>
+
+<script>
+    var x="";
+    var uzsakymas = {
+        "pirmiejiPatiekalai": [
+        {"pavadinimas":"Burokėlių sriuba","kaina":"1.49"},
+        {"pavadinimas":"Kopūstų sriuba","kaina":"1.17"},
+        {"pavadinimas":"Charčio","kaina":"1.89"}],
+        "antriejiPatiekalai": [
+        {"pavadinimas":"Kijovo kotletas","kaina":"2.49"},
+        {"pavadinimas":"Cezario salotos","kaina":"2.75"},
+        {"pavadinimas":"Steikas","kaina":"8.49"}],
+        "gerimai": [
+        {"pavadinimas":"Obuolių sultys","kaina":"1.49"},
+        {"pavadinimas":"Juodoji arbata","kaina":"1.25"},
+        {"pavadinimas":"Kava","kaina":"1.29"}],
+        "desertai": [
+        {"pavadinimas":"Keksas","kaina":"1.19"},
+        {"pavadinimas":"Obuolių pyragas","kaina":"1.79"},
+        {"pavadinimas":"Šokoladinis pudingas","kaina":"2.29"}]
+    }      
+
+    for (var i in uzsakymas.pirmiejiPatiekalai) {
+        x += "<p>" + uzsakymas.pirmiejiPatiekalai[i].pavadinimas + "</p>";
+        var item = document.createElement("option");
+        item.text = uzsakymas.pirmiejiPatiekalai[i].pavadinimas;
+        item.value = i;
+        var dropdown = document.getElementById("options1");
+        dropdown.appendChild(item);
+    }
+
+    for (var i in uzsakymas.antriejiPatiekalai) {
+        x += "<p>" + uzsakymas.antriejiPatiekalai[i].pavadinimas + "</p>";
+        var item = document.createElement("option");
+        item.text = uzsakymas.antriejiPatiekalai[i].pavadinimas;
+        item.value = i;
+        var dropdown = document.getElementById("options2");
+        dropdown.appendChild(item);
+
+    }
+
+    for (var i in uzsakymas.gerimai) {
+		x += "<p>" + uzsakymas.gerimai[i].pavadinimas + "</p>";
+		var item = document.createElement("option");
+		item.text = uzsakymas.gerimai[i].pavadinimas;
+		item.value = i;
+		var dropdown = document.getElementById("options3");
+		dropdown.appendChild(item);
+	}
+				
+	for (var i in uzsakymas.desertai) {
+		x += "<p>" + uzsakymas.desertai[i].pavadinimas + "</p>";
+		var item = document.createElement("option");
+		item.text = uzsakymas.desertai[i].pavadinimas;
+		item.value = i;
+		var dropdown = document.getElementById("options4");
+		dropdown.appendChild(item);
+	}
+
+    document.getElementById('options1').addEventListener(
+        'click',
+        function(){
+            document.getElementById('options1A').innerHTML = uzsakymas["pirmiejiPatiekalai"][this.value].kaina;
+        }
+    )
+
+    document.getElementById('options2').addEventListener(
+        'click',
+        function(){
+            document.getElementById('options2A').innerHTML = uzsakymas["antriejiPatiekalai"][this.value].kaina;
+        }
+    )
+
+    document.getElementById('options3').addEventListener(
+        'click',
+        function(){
+            document.getElementById('options3A').innerHTML = uzsakymas["gerimai"][this.value].kaina;
+        }
+    )
+
+    document.getElementById('options4').addEventListener(
+        'click',
+        function(){
+            document.getElementById('options4A').innerHTML = uzsakymas["desertai"][this.value].kaina;
+        }
+    )
+
+    function uzsakyti(){
+        var pirmasuzsakymas=""; antrasuzsakymas=""; treciasuzsakymas=""; ketvirtasuzsakymas="";
+		var pirmasuzsakymasKaina=""; antrasuzsakymasKaina=""; gerimaiKaina=""; desertaiKaina="";
+		var pirmasuzsakymasKainaSK, antrasuzsakymasKainaSK, gerimaiKainaSK, desertaiKainaSK;
+		var suma=0;        
+      
+        for (var i in uzsakymas.pirmiejiPatiekalai){
+            pirmasuzsakymas = uzsakymas.pirmiejiPatiekalai[i].pavadinimas;
+			pirmasuzsakymasKaina = uzsakymas.pirmiejiPatiekalai[i].kaina;
+			pirmasuzsakymasKainaSK = Number(pirmasuzsakymasKaina);
+        }
+		
+        for (var i in uzsakymas.antriejiPatiekalai){
+            antrasuzsakymas = uzsakymas.antriejiPatiekalai[i].pavadinimas;
+			antrasuzsakymasKaina = uzsakymas.antriejiPatiekalai[i].kaina;
+			antrasuzsakymasKainaSK = Number(antrasuzsakymasKaina);
+        }
+		
+        for (var i in uzsakymas.gerimai){
+            treciasuzsakymas = uzsakymas.gerimai[i].pavadinimas;
+			gerimaiKaina = uzsakymas.gerimai[i].kaina;
+			gerimaiKainaSK = Number(gerimaiKaina);
+        }
+		
+        for (var i in uzsakymas.desertai){
+            ketvirtasuzsakymas = uzsakymas.desertai[i].pavadinimas;
+			desertaiKaina = uzsakymas.desertai[i].kaina;
+			desertaiKainaSK = Number(desertaiKaina);
+        }
+		suma = pirmasuzsakymasKainaSK+antrasuzsakymasKainaSK+gerimaiKainaSK+desertaiKainaSK;
+        document.getElementById("pateiktasUzsakymas").innerHTML = "<b>Your order: </b><br><br>"+pirmasuzsakymas + " "+ pirmasuzsakymasKaina+" &euro;<br>"
+		+antrasuzsakymas + " "+ antrasuzsakymasKaina+" &euro;<br>"+treciasuzsakymas + " "+ gerimaiKaina+" &euro;<br>"+ketvirtasuzsakymas + " "+ desertaiKaina+" &euro;<br><br><b>Total: </b>"+"<b>"+suma+" &euro;</b>";		
+    }
+</script>
+</body>
+</html>
